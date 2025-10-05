@@ -35,3 +35,28 @@ A **backend-heavy RESTful API** designed to manage warehouse products with full 
 ```bash
 git clone <your-repository-url.git>
 cd inventory-system
+
+## 📡 How to Use the API (Endpoints)
+
+The base URL for all endpoints is:  
+👉 **http://localhost:8080/api/products**
+
+| Method | Endpoint               | Description                        | Request Body Example |
+|--------|-------------------------|------------------------------------|----------------------|
+| POST   | `/`                     | Creates a new product              | ```json {"name": "Laptop", "description": "A gaming laptop", "stockQuantity": 50, "lowStockThreshold": 10} ``` |
+| GET    | `/`                     | Retrieves a list of all products   | None |
+| GET    | `/{id}`                 | Retrieves a single product by ID   | None |
+| PUT    | `/{id}`                 | Updates an existing product        | ```json {"name": "Laptop Pro", "description": "A powerful laptop for professionals", "stockQuantity": 45, "lowStockThreshold": 15} ``` |
+| DELETE | `/{id}`                 | Deletes a product by its ID        | None |
+| POST   | `/{id}/increase-stock`  | Increases the stock of a product   | ```json {"amount": 10} ``` |
+| POST   | `/{id}/decrease-stock`  | Decreases the stock of a product   | ```json {"amount": 5} ``` |
+| GET    | `/low-stock`            | Lists all products below threshold | None |
+
+---
+
+## 🧪 How to Run Test Cases
+
+To run the unit tests for the service layer, use the following Maven command:
+
+```bash
+./mvnw test
