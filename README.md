@@ -1,142 +1,98 @@
-Inventory Management System API
-Project Description
-This project is a backend-heavy RESTful API designed to manage products in a warehouse. It provides full CRUD (Create, Read, Update, Delete) functionality for products and includes robust business logic for handling inventory stock levels.
+📦 Inventory Management System API
 
-The core features include:
+A backend-heavy RESTful API designed to manage warehouse products with full CRUD operations, stock management, and low-stock tracking. Built with Java Spring Boot and MySQL, this project ensures safe and efficient inventory operations.
 
-Managing products with a name, description, and stock quantity.
+🚀 Features
 
-Endpoints to safely increase and decrease product stock.
+➕ Create, ✏️ Update, 🔍 Read, and ❌ Delete products.
 
-Business logic that prevents stock from ever going below zero.
+📊 Manage stock with dedicated endpoints to increase/decrease quantity.
 
-A bonus feature to list all products that have fallen below their specified low-stock threshold.
+🚫 Prevents stock from dropping below zero.
 
-This API is built with Java and the Spring Boot framework, using Spring Data JPA for database interaction and a MySQL database for persistence.
+⚠️ Bonus: List all products that are below their low-stock threshold.
 
-How to Set Up and Run Locally
-Prerequisites
+🛠️ Tech Stack
+
+Java 17+
+
+Spring Boot (REST API, layered architecture)
+
+Spring Data JPA & Hibernate (ORM)
+
+MySQL (Database persistence)
+
+Maven (Build tool)
+
+⚙️ Setup & Installation
+✅ Prerequisites
+
 Java 17 or later
 
 Apache Maven
 
 MySQL Server
 
-An API testing tool like Postman or Insomnia.
+Postman / Insomnia (for testing APIs)
 
-1. Clone the Repository
+📥 Clone the Repository
 git clone <your-repository-url.git>
 cd inventory-system
 
-2. Configure the Database
-Open your MySQL server and create a new database.
+🗄️ Configure Database
+
+Create a new database in MySQL:
 
 CREATE DATABASE inventory_db;
 
-Navigate to src/main/resources/application.properties.
 
-Update the following properties with your MySQL username and password.
+Update src/main/resources/application.properties:
 
 spring.datasource.url=jdbc:mysql://localhost:3306/inventory_db
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 
-3. Run the Application
-You can run the application using the Maven wrapper:
-
+▶️ Run the Application
 ./mvnw spring-boot:run
 
-The API will start on http://localhost:8080.
 
-How to Use the API (Endpoints)
-The base URL for all endpoints is http://localhost:8080/api/products.
+API starts at 👉 http://localhost:8080
 
-Method
+📡 API Endpoints
 
-Endpoint
+Base URL: http://localhost:8080/api/products
 
-Description
+Method	Endpoint	Description	Request Body Example
+POST	/	Create a new product	{"name": "Laptop", "description": "A gaming laptop", "stockQuantity": 50, "lowStockThreshold": 10}
+GET	/	Get all products	None
+GET	/{id}	Get product by ID	None
+PUT	/{id}	Update a product	{"name": "Laptop Pro", "description": "For professionals", "stockQuantity": 45, "lowStockThreshold": 15}
+DELETE	/{id}	Delete a product	None
+POST	/{id}/increase-stock	Increase stock	{"amount": 10}
+POST	/{id}/decrease-stock	Decrease stock	{"amount": 5}
+GET	/low-stock	Get products below threshold	None
+🧪 Running Tests
 
-Request Body Example
-
-POST
-
-/
-
-Creates a new product.
-
-{"name": "Laptop", "description": "A gaming laptop", "stockQuantity": 50, "lowStockThreshold": 10}
-
-GET
-
-/
-
-Retrieves a list of all products.
-
-(None)
-
-GET
-
-/{id}
-
-Retrieves a single product by its ID.
-
-(None)
-
-PUT
-
-/{id}
-
-Updates an existing product.
-
-{"name": "Laptop Pro", "description": "A powerful laptop for professionals", "stockQuantity": 45, "lowStockThreshold": 15}
-
-DELETE
-
-/{id}
-
-Deletes a product by its ID.
-
-(None)
-
-POST
-
-/{id}/increase-stock
-
-Increases the stock of a product.
-
-{"amount": 10}
-
-POST
-
-/{id}/decrease-stock
-
-Decreases the stock of a product.
-
-{"amount": 5}
-
-GET
-
-/low-stock
-
-Lists all products below their low-stock threshold.
-
-(None)
-
-How to Run Test Cases
-(Note: This section is for the bonus feature. You would add instructions here after writing unit tests).
-
-To run the unit tests for the service layer, use the following Maven command:
+Run unit tests with:
 
 ./mvnw test
 
-Design Choices & Assumptions
-Framework: Chose Spring Boot for its rapid development capabilities, embedded server, and robust ecosystem for building REST APIs.
+🏗️ Design Choices & Assumptions
 
-Architecture: Implemented a standard 3-layer architecture (Controller, Service, Repository) to separate concerns and improve maintainability.
+Framework: Spring Boot for rapid development & ecosystem.
 
-Database: Used Spring Data JPA and Hibernate for ORM, which simplifies database interactions. ddl-auto is set to update for development convenience, allowing the schema to evolve with the entity classes.
+Architecture: 3-layer (Controller → Service → Repository).
 
-Error Handling: Specific exceptions (IllegalArgumentException, IllegalStateException) are thrown from the service layer for invalid operations (e.g., negative stock amount, insufficient stock). The controller catches these and returns a 400 Bad Request status with a clear error message.
+Database: JPA + Hibernate ORM for simplified interaction.
 
-Stock Operations: Created dedicated endpoints for increasing/decreasing stock to ensure these critical operations are handled transactionally and with proper validation, rather than allowing direct manipulation of the stockQuantity field via the generic PUT endpoint.
+Error Handling: Service layer throws clear exceptions → Controller maps to meaningful HTTP responses.
+
+Stock Management: Dedicated endpoints for increase/decrease stock to ensure safe and transactional operations.
+
+✨ Future Improvements
+
+✅ Add JWT-based authentication for secure API access.
+
+✅ Implement pagination & sorting for large product lists.
+
+✅ Add Docker support for easy deployment.
