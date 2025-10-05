@@ -88,11 +88,3 @@ Database: JPA + Hibernate ORM for simplified interaction.
 Error Handling: Service layer throws clear exceptions → Controller maps to meaningful HTTP responses.
 
 Stock Management: Dedicated endpoints for increase/decrease stock to ensure safe and transactional operations.
-
-✨ Future Improvements
-
-✅ Add JWT-based authentication for secure API access.
-
-✅ Implement pagination & sorting for large product lists.
-
-✅ Add Docker support for easy deployment.
